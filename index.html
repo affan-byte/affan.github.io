@@ -1,702 +1,330 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kicau Mania | Premium Bird Shop</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
-        :root {
-            --primary: #facc15;
-            --primary-hover: #e2b80d;
-            --success: #22c55e;
-            --bg-dark: #090d16;
-            --bg-card: #131c2e;
-            --text-light: #f8fafc;
-            --text-muted: #94a3b8;
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: var(--text-light);
-            overflow-x: hidden;
-            background-color: var(--bg-dark);
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 0 24px;
-        }
-
-        /* HEADER & NAVBAR */
-        header {
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            background: rgba(9, 13, 22, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .navbar {
-            max-width: 1200px;
-            margin: auto;
-            padding: 20px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 26px;
-            font-weight: 800;
-            color: var(--primary);
-            letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 32px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-light);
-            font-weight: 600;
-            font-size: 15px;
-            transition: 0.3s;
-            opacity: 0.8;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-            opacity: 1;
-        }
-
-        section {
-            padding: 120px 0;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        /* ==========================================
-           PENGATURAN HERO BACKGROUND VIDEO 
-        ============================================*/
-        .hero {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding-top: 80px;
-            overflow: hidden; /* Agar video tidak keluar dari area hero */
-        }
-
-        .hero-video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            transform: translate(-50%, -50%);
-            object-fit: cover; /* Menjaga proporsi video tetap rapi */
-            z-index: 0;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(9, 13, 22, 0.65); /* Lapisan gelap agar teks mudah dibaca */
-            z-index: 1;
-        }
-
-        /* ========================================== */
-
-        .hero-content h1 {
-            font-size: 64px;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            letter-spacing: -2px;
-        }
-
-        .hero-content h1 span {
-            color: var(--primary);
-            background: linear-gradient(to right, #facc15, #f97316);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-content p {
-            max-width: 600px;
-            margin: auto;
-            line-height: 1.8;
-            font-size: 18px;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-        }
-
-        .btn {
-            padding: 16px 32px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 16px;
-            transition: 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: #000;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 12px 24px rgba(250, 204, 21, 0.2);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-light);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-
-        /* SECTION LAINNYA */
-        .birds-section {
-            background: linear-gradient(rgba(15, 23, 42, 0.5), rgba(15, 23, 42, 0.5)), url('img/koleksi-bg.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .about {
-            background: linear-gradient(rgba(9, 13, 22, 0.85), rgba(9, 13, 22, 0.85)), url('img/tentang-bg.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .testimonials {
-            background-color: #0b111e;
-        }
-
-        .contact-section {
-            background: linear-gradient(rgba(9, 13, 22, 0.75), rgba(9, 13, 22, 0.75)), url('img/kontak-bg.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 70px;
-        }
-
-        .section-title h2 {
-            font-size: 38px;
-            font-weight: 800;
-            letter-spacing: -1px;
-            margin-bottom: 16px;
-        }
-
-        .section-title p {
-            color: var(--text-muted);
-            font-size: 16px;
-            max-width: 500px;
-            margin: auto;
-        }
-
-        /* CARDS / JUALAN PRODUCTS */
-        .bird-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 32px;
-        }
-
-        .bird-card {
-            background: var(--bg-card);
-            border-radius: 24px;
-            overflow: hidden;
-            transition: 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative;
-        }
-
-        .bird-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(250, 204, 21, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .card-img-wrapper {
-            position: relative;
-            height: 240px;
-            overflow: hidden;
-        }
-
-        .card-img-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.4s;
-        }
-
-        .bird-card:hover .card-img-wrapper img {
-            transform: scale(1.05);
-        }
-
-        .badge {
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            background: var(--primary);
-            color: #000;
-            padding: 6px 14px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            z-index: 2;
-        }
-
-        .bird-content {
-            padding: 30px;
-        }
-
-        .bird-content h3 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .bird-content p {
-            color: var(--text-muted);
-            font-size: 15px;
-            line-height: 1.6;
-            margin-bottom: 24px;
-            height: 48px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 20px;
-        }
-
-        .price-box .price-label {
-            font-size: 12px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 2px;
-        }
-
-        .price-box .price {
-            font-size: 20px;
-            font-weight: 800;
-            color: #fff;
-        }
-
-        .btn-order {
-            background: var(--success);
-            color: #fff;
-            padding: 12px 20px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 14px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.3s;
-        }
-
-        .btn-order:hover {
-            background: #16a34a;
-            box-shadow: 0 8px 16px rgba(34, 197, 94, 0.2);
-        }
-
-        /* ABOUT SECTION */
-        .about-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 64px;
-            align-items: center;
-        }
-
-        .about-text h2 {
-            font-size: 42px;
-            font-weight: 800;
-            margin-bottom: 24px;
-            letter-spacing: -1px;
-        }
-
-        .about-text p {
-            font-size: 16px;
-            line-height: 1.9;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 32px;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 600;
-        }
-
-        .feature-item i {
-            color: var(--primary);
-            font-size: 18px;
-        }
-
-        .about-image {
-            position: relative;
-            border-radius: 28px;
-            height: 400px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
-        }
-
-        .about-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* CONTACT SECTION */
-        .contact-box {
-            background: #131c2e;
-            padding: 60px;
-            border-radius: 32px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.05);
-            max-width: 800px;
-            margin: auto;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
-
-        .contact-box h2 {
-            font-size: 36px;
-            font-weight: 800;
-            margin-bottom: 16px;
-        }
-
-        .contact-box p {
-            color: var(--text-muted);
-            margin-bottom: 32px;
-        }
-
-        .info-pills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            justify-content: center;
-            margin-bottom: 40px;
-        }
-
-        .pill {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .pill i {
-            color: var(--primary);
-        }
-
-        .wa-large-btn {
-            background: var(--success);
-            color: white;
-            padding: 18px 40px;
-            border-radius: 16px;
-            font-weight: 700;
-            font-size: 18px;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            transition: 0.3s;
-        }
-
-        .wa-large-btn:hover {
-            background: #16a34a;
-            transform: translateY(-3px);
-            box-shadow: 0 12px 24px rgba(34, 197, 94, 0.3);
-        }
-
-        /* FOOTER */
-        footer {
-            background: #060911;
-            padding: 40px 24px;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 14px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
-        /* RESPONSIVE DESIGN */
-        @media(max-width: 900px) {
-            .hero-content h1 {
-                font-size: 48px;
-            }
-            .about-wrapper {
-                grid-template-columns: 1fr;
-                gap: 48px;
-            }
-            section {
-                padding: 80px 0;
-            }
-            .about-image {
-                height: 300px;
-            }
-        }
-
-        @media(max-width: 600px) {
-            .navbar {
-                flex-direction: row !important;
-                justify-content: space-between !important;
-                padding: 16px 20px !important;
-            }
-            .logo {
-                font-size: 20px !important;
-            }
-            .nav-links {
-                gap: 12px !important;
-            }
-            .nav-links a {
-                font-size: 13px !important;
-            }
-            .hero-content h1 {
-                font-size: 36px;
-            }
-            .hero-content p {
-                font-size: 15px;
-            }
-            .cta-buttons {
-                flex-direction: column;
-                padding: 0 20px;
-            }
-            .contact-box {
-                padding: 32px 20px;
-            }
-            .pill {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pengingat Tugas</title>
+
+<!-- TATA LETAK PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1B6E6E">
+<link rel="apple-touch-icon" href="icon-192.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    box-sizing:border-box;
+    --paper:#FAF7F1; --ink:#1F2430; --line:#E4DFD3;
+    --teal:#1B6E6E; --teal-ink:#0E4444;
+    --amber:#C7862B; --amber-bg:#FBF0DD;
+    --danger:#B8433A; --danger-bg:#FBE9E6;
+    --ok-bg:#EDF3EC;
+    --card:#FFFFFF;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  :root:not([data-theme="light"]){}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#15181F; --ink:#EDEAE1; --line:#2A2E38;
+      --teal:#4FBFBF; --teal-ink:#BEEAEA;
+      --amber:#E3A64C; --amber-bg:#3A2E15;
+      --danger:#E27C72; --danger-bg:#3A1E1B;
+      --ok-bg:#1D2A22;
+      --card:#1B1F28;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#15181F; --ink:#EDEAE1; --line:#2A2E38;
+    --teal:#4FBFBF; --teal-ink:#BEEAEA;
+    --amber:#E3A64C; --amber-bg:#3A2E15;
+    --danger:#E27C72; --danger-bg:#3A1E1B;
+    --ok-bg:#1D2A22;
+    --card:#1B1F28;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px);}
+  html,body{height:100%;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:640px; margin:0 auto; padding:2.5rem 1.25rem 4rem;}
+  h1{
+    font-family:'Space Grotesk',sans-serif; font-weight:700;
+    font-size:1.9rem; letter-spacing:-0.01em; margin:0 0 0.35rem;
+  }
+  .sub{color:color-mix(in srgb, var(--ink) 60%, transparent); margin:0 0 2rem; font-size:0.95rem; max-width:46ch;}
+
+  .notify-bar{
+    display:flex; align-items:center; justify-content:space-between; gap:1rem;
+    border:1px solid var(--line); border-radius:10px; padding:0.85rem 1rem;
+    margin-bottom:1.75rem; background:var(--card); font-size:0.88rem;
+  }
+  .notify-bar span{color:color-mix(in srgb, var(--ink) 70%, transparent);}
+  .notify-bar button{
+    background:var(--teal); color:#fff; border:none; border-radius:7px;
+    padding:0.5rem 0.9rem; font-size:0.85rem; font-weight:600; cursor:pointer;
+    font-family:inherit; white-space:nowrap;
+  }
+  .notify-bar button:disabled{opacity:0.5; cursor:default;}
+
+  form{
+    display:grid; gap:0.75rem; background:var(--card); border:1px solid var(--line);
+    border-radius:12px; padding:1.25rem; margin-bottom:2rem;
+  }
+  .row{display:grid; grid-template-columns:1fr; gap:0.75rem;}
+  @media(min-width:480px){ .row{grid-template-columns:1fr 1fr;} }
+  label{font-size:0.78rem; font-weight:600; color:color-mix(in srgb, var(--ink) 65%, transparent); margin-bottom:0.3rem; display:block;}
+  input[type=text], input[type=datetime-local]{
+    width:100%; padding:0.6rem 0.7rem; border:1px solid var(--line); border-radius:8px;
+    background:var(--paper); color:var(--ink); font-family:inherit; font-size:0.95rem;
+  }
+  input:focus-visible{outline:2px solid var(--teal); outline-offset:1px;}
+  form button{
+    justify-self:start; background:var(--ink); color:var(--paper); border:none;
+    border-radius:8px; padding:0.65rem 1.2rem; font-weight:600; font-size:0.9rem;
+    cursor:pointer; font-family:inherit;
+  }
+  form button:hover{opacity:0.9;}
+
+  .list{display:grid; gap:0.75rem;}
+  .empty{
+    text-align:left; padding:2rem 1.25rem; border:1px dashed var(--line); border-radius:12px;
+    color:color-mix(in srgb, var(--ink) 55%, transparent); font-size:0.92rem;
+  }
+  .task{
+    background:var(--card); border:1px solid var(--line); border-left-width:5px;
+    border-radius:10px; padding:0.9rem 1rem; display:flex; justify-content:space-between;
+    gap:1rem; align-items:center;
+  }
+  .task.upcoming{border-left-color:var(--line);}
+  .task.soon{border-left-color:var(--amber); background:linear-gradient(0deg,var(--card),var(--card)), var(--amber-bg); background-blend-mode:normal;}
+  .task.soon{background:var(--amber-bg);}
+  .task.overdue{border-left-color:var(--danger); background:var(--danger-bg);}
+  .task.done{border-left-color:var(--line); opacity:0.55;}
+  .t-main{min-width:0;}
+  .t-title{font-weight:600; font-size:1rem; margin:0 0 0.2rem; word-break:break-word;}
+  .t-title.strike{text-decoration:line-through;}
+  .t-meta{font-size:0.82rem; color:color-mix(in srgb, var(--ink) 60%, transparent); font-variant-numeric:tabular-nums;}
+  .t-count{font-family:'Space Grotesk',monospace; font-weight:700; font-size:0.82rem;}
+  .soon .t-count{color:var(--amber);}
+  .overdue .t-count{color:var(--danger);}
+  .t-actions{display:flex; gap:0.4rem; flex-shrink:0;}
+  .t-actions button{
+    border:1px solid var(--line); background:transparent; color:var(--ink);
+    border-radius:7px; width:2rem; height:2rem; cursor:pointer; font-size:0.95rem;
+    display:flex; align-items:center; justify-content:center; font-family:inherit;
+  }
+  .t-actions button:hover{background:var(--paper);}
+</style>
 </head>
 <body>
+<div class="wrap">
+  <h1>Pengingat Tugas</h1>
+  <p class="sub">Catat tugas dan tenggat waktunya. Kamu akan mendapat notifikasi di perangkat ini saat tenggat sudah dekat.</p>
 
-    <header>
-        <div class="navbar">
-            <div class="logo">
-                <i class="fa-solid fa-dove"></i> Kicau Mania
-            </div>
-            <div class="nav-links">
-                <a href="#home">Home</a>
-                <a href="#birds">Koleksi</a>
-                <a href="#about">Tentang</a>
-                <a href="#contact">Kontak</a>
-            </div>
+  <div class="notify-bar">
+    <span id="notifyStatus">Notifikasi belum diaktifkan.</span>
+    <button id="notifyBtn">Aktifkan notifikasi</button>
+  </div>
+
+  <form id="taskForm">
+    <div>
+      <label for="title">Nama tugas</label>
+      <input type="text" id="title" placeholder="Contoh: Laporan praktikum kimia" required maxlength="120">
+    </div>
+    <div class="row">
+      <div>
+        <label for="deadline">Tenggat waktu</label>
+        <input type="datetime-local" id="deadline" required>
+      </div>
+      <div>
+        <label for="remind">Ingatkan sebelum</label>
+        <select id="remind" style="width:100%;padding:0.6rem 0.7rem;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);font-family:inherit;font-size:0.95rem;">
+          <option value="1440">1 hari</option>
+          <option value="180">3 jam</option>
+          <option value="60" selected>1 jam</option>
+          <option value="15">15 menit</option>
+        </select>
+      </div>
+    </div>
+    <button type="submit">Tambah tugas</button>
+  </form>
+
+  <div class="list" id="list"></div>
+</div>
+
+<script>
+// Mendaftarkan Service Worker untuk fitur PWA (Offline & Installable)
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then((reg) => console.log('Service Worker terdaftar dengan sukses!', reg.scope))
+      .catch((err) => console.error('Gagal mendaftar Service Worker', err));
+  });
+}
+
+(function(){
+  const STORE_KEY = 'reminder_tasks_v1';
+  const form = document.getElementById('taskForm');
+  const listEl = document.getElementById('list');
+  const notifyBtn = document.getElementById('notifyBtn');
+  const notifyStatus = document.getElementById('notifyStatus');
+
+  // Mengatur nilai default deadline ke waktu saat ini
+  function setDefaultDeadline() {
+    const now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    document.getElementById('deadline').value = now.toISOString().slice(0, 16);
+  }
+  setDefaultDeadline();
+
+  function load(){
+    try{ return JSON.parse(localStorage.getItem(STORE_KEY)) || []; }
+    catch(e){ return []; }
+  }
+  function save(tasks){
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(tasks)); }
+    catch(e){ console.error('Gagal menyimpan', e); }
+  }
+
+  let tasks = load();
+
+  function updateNotifyUI(){
+    if(!('Notification' in window)){
+      notifyStatus.textContent = 'Perangkat ini tidak mendukung notifikasi browser.';
+      notifyBtn.disabled = true;
+      return;
+    }
+    if(Notification.permission === 'granted'){
+      notifyStatus.textContent = 'Notifikasi aktif untuk halaman ini.';
+      notifyBtn.disabled = true;
+      notifyBtn.textContent = 'Aktif';
+    } else if(Notification.permission === 'denied'){
+      notifyStatus.textContent = 'Izin notifikasi ditolak. Ubah lewat pengaturan browser untuk mengaktifkan.';
+      notifyBtn.disabled = true;
+    } else {
+      notifyStatus.textContent = 'Notifikasi belum diaktifkan.';
+      notifyBtn.disabled = false;
+      notifyBtn.textContent = 'Aktifkan notifikasi';
+    }
+  }
+
+  notifyBtn.addEventListener('click', function(){
+    if(!('Notification' in window)) return;
+    Notification.requestPermission().then(updateNotifyUI);
+  });
+
+  function fmtDeadline(d){
+    return d.toLocaleString('id-ID', {weekday:'short', day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
+  }
+
+  function timeLeftLabel(ms){
+    if(ms <= 0) return 'Sudah lewat tenggat';
+    const min = Math.floor(ms/60000);
+    const days = Math.floor(min/1440);
+    const hours = Math.floor((min%1440)/60);
+    const mins = min%60;
+    if(days > 0) return `${days} hari ${hours} jam lagi`;
+    if(hours > 0) return `${hours} jam ${mins} menit lagi`;
+    return `${mins} menit lagi`;
+  }
+
+  function render(){
+    tasks.sort((a,b)=> a.done - b.done || new Date(a.deadline) - new Date(b.deadline));
+    if(tasks.length === 0){
+      listEl.innerHTML = '<div class="empty">Belum ada tugas. Tambahkan tugas pertamamu di atas.</div>';
+      return;
+    }
+    const now = Date.now();
+    listEl.innerHTML = tasks.map(t=>{
+      const dl = new Date(t.deadline);
+      const diff = dl.getTime() - now;
+      let cls = 'upcoming';
+      if(t.done) cls = 'done';
+      else if(diff <= 0) cls = 'overdue';
+      else if(diff <= t.remindMinutes*60000) cls = 'soon';
+      return `<div class="task ${cls}" data-id="${t.id}">
+        <div class="t-main">
+          <p class="t-title ${t.done?'strike':''}">${escapeHtml(t.title)}</p>
+          <p class="t-meta">${fmtDeadline(dl)} &middot; <span class="t-count">${t.done?'Selesai':timeLeftLabel(diff)}</span></p>
         </div>
-    </header>
-
-    <section class="hero" id="home">
-        
-        <video autoplay muted loop playsinline class="hero-video">
-            <source src="video/birds.mp4" type="video/mp4">
-            Browser Anda tidak mendukung tag video.
-        </video>
-        
-        <div class="hero-overlay"></div>
-
-        <div class="container" style="position: relative; z-index: 2;">
-            <div class="hero-content">
-                <h1><span>Kicau Mania</span></h1>
-                <p>Koleksi burung pilihan terbaik dengan jaminan kesehatan, mental petarung, dan siap menghiasi rumah Anda dengan kicauan merdu.</p>
-                <div class="cta-buttons">
-                    <a href="#birds" class="btn btn-primary"><i class="fa-solid fa-store"></i> Lihat Koleksi</a>
-                    <a href="#contact" class="btn btn-secondary">Hubungi Kami</a>
-                </div>
-            </div>
+        <div class="t-actions">
+          <button class="doneBtn" title="${t.done?'Tandai belum selesai':'Tandai selesai'}">${t.done?'↺':'✓'}</button>
+          <button class="delBtn" title="Hapus tugas">✕</button>
         </div>
-    </section>
+      </div>`;
+    }).join('');
+  }
 
-    <section class="birds-section" id="birds">
-        <div class="container">
-            <div class="section-title">
-                <h2>Koleksi Siap Pinang</h2>
-                <p>Setiap burung dirawat intensif oleh ahli profesional, dijamin sehat walafiat.</p>
-            </div>
+  function escapeHtml(s){
+    const d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
 
-            <div class="bird-grid">
-                <div class="bird-card">
-                    <div class="card-img-wrapper">
-                        <span class="badge">Super Gacor</span>
-                        <img src="img/murai-batu.jpg" alt="Murai Batu">
-                    </div>
-                    <div class="bird-content">
-                        <h3>Murai Batu Medan</h3>
-                        <p>Ekor panjang, mental petarung kuat, isian materi melimpah dan volume tembus.</p>
-                        <div class="card-footer">
-                            <div class="price-box">
-                                <div class="price-label">Harga</div>
-                                <div class="price">Rp 2.500.000</div>
-                            </div>
-                            <a href="https://wa.me/6281329648883?text=Halo%20Kicau%20Mania,%20saya%20tertarik%20dengan%20Murai%20Batu%20Medan" class="btn-order">
-                                <i class="fa-brands fa-whatsapp"></i> Beli
-                            </a>
-                        </div>
-                    </div>
-                </div>
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const title = document.getElementById('title').value.trim();
+    const deadline = document.getElementById('deadline').value;
+    const remindMinutes = parseInt(document.getElementById('remind').value, 10);
+    if(!title || !deadline) return;
+    tasks.push({
+      id: Date.now().toString(36) + Math.random().toString(36).slice(2,6),
+      title, deadline, remindMinutes, done:false, notified:false
+    });
+    save(tasks);
+    form.reset();
+    document.getElementById('remind').value = '60';
+    setDefaultDeadline(); // Reset waktu input kembali ke waktu saat ini
+    render();
+  });
 
-                <div class="bird-card">
-                    <div class="card-img-wrapper">
-                        <span class="badge">Suara Merdu</span>
-                        <img src="img/lovebird.jpg" alt="Lovebird">
-                    </div>
-                    <div class="bird-content">
-                        <h3>Lovebird Biola</h3>
-                        <p>Warna  cerah eksotis, aktif, durasi kekekan stabil cocok untuk teras maupun lomba.</p>
-                        <div class="card-footer">
-                            <div class="price-box">
-                                <div class="price-label">Harga</div>
-                                <div class="price">Rp 450.000</div>
-                            </div>
-                            <a href="https://wa.me/6281329648883?text=Halo%20Kicau%20Mania,%20saya%20tertarik%20dengan%20Lovebird%20Biola" class="btn-order">
-                                <i class="fa-brands fa-whatsapp"></i> Beli
-                            </a>
-                        </div>
-                    </div>
-                </div>
+  listEl.addEventListener('click', function(e){
+    const card = e.target.closest('.task');
+    if(!card) return;
+    const id = card.dataset.id;
+    const t = tasks.find(x=>x.id === id);
+    if(!t) return;
+    if(e.target.classList.contains('delBtn')){
+      tasks = tasks.filter(x=>x.id !== id);
+      save(tasks); render();
+    } else if(e.target.classList.contains('doneBtn')){
+      t.done = !t.done;
+      save(tasks); render();
+    }
+  });
 
-                <div class="bird-card">
-                    <div class="card-img-wrapper">
-                        <span class="badge">Mental Juara</span>
-                        <img src="img/kacer.jpg" alt="Kacer">
-                    </div>
-                    <div class="bird-content">
-                        <h3>Kacer Poci</h3>
-                        <p>Gaya tarung ngobra eksklusif, speed rapat, materi tajam, kondisi sangat fit.</p>
-                        <div class="card-footer">
-                            <div class="price-box">
-                                <div class="price-label">Harga</div>
-                                <div class="price">Rp 1.800.000</div>
-                            </div>
-                            <a href="https://wa.me/6281329648883?text=Halo%20Kicau%20Mania,%20saya%20tertarik%20dengan%20Kacer%20Poci" class="btn-order">
-                                <i class="fa-brands fa-whatsapp"></i> Beli
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  function checkReminders(){
+    const now = Date.now();
+    let changed = false;
+    tasks.forEach(t=>{
+      if(t.done || t.notified) return;
+      const diff = new Date(t.deadline).getTime() - now;
+      if(diff > 0 && diff <= t.remindMinutes*60000){
+        if('Notification' in window && Notification.permission === 'granted'){
+          new Notification('Tenggat tugas sudah dekat', {
+            body: `${t.title} — ${timeLeftLabel(diff)}`,
+            icon: 'icon-192.png' // Menambahkan ikon PWA di notifikasi
+          });
+        }
+        t.notified = true;
+        changed = true;
+      }
+    });
+    if(changed) save(tasks);
+    render();
+  }
 
-    <section class="about" id="about">
-        <div class="container">
-            <div class="about-wrapper">
-                <div class="about-text">
-                    <h2>Kenapa Harus di Kicau Mania?</h2>
-                    <p>Kami berkomitmen menjadi platform penyedia unggas andalan hobiis Indonesia dengan menjaga standardisasi nutrisi, vitamin, dan kebersihan kandang ternak kami.</p>
-                    <p>Selain menjual burung prospek berkualitas, kami melayani konsultasi gratis pasca pembelian agar performa burung peliharaan Anda tetap maksimal di rumah.</p>
-                    <div class="features">
-                        <div class="feature-item"><i class="fa-solid fa-circle-check"></i> Jaminan 100% Sehat</div>
-                        <div class="feature-item"><i class="fa-solid fa-circle-check"></i> Konsultasi Perawatan</div>
-                        <div class="feature-item"><i class="fa-solid fa-circle-check"></i> Pengiriman Aman</div>
-                        <div class="feature-item"><i class="fa-solid fa-circle-check"></i> Harga Bergaransi</div>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <img src="img/tentang-kami.jpg" alt="Tentang Toko Kami">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="contact-section" id="contact">
-        <div class="container">
-            <div class="contact-box">
-                <h2>Pesan Sekarang & Amankan Burung Impianmu!</h2>
-                <p>Stok burung juara bersifat terbatas setiap bulannya. Klik tombol di bawah ini untuk terhubung langsung dengan admin kami via WhatsApp.</p>
-                <div class="info-pills">
-                    <div class="pill"><i class="fa-solid fa-location-dot"></i> C. Simanjuntak No. 60, Yogyakarta</div>
-                    <div class="pill"><i class="fa-solid fa-phone"></i> 082329158690</div>
-                    <div class="pill"><i class="fa-solid fa-envelope"></i> kicaumania@gmail.com</div>
-                </div>
-                <a href="https://wa.me/6282329158690?text=Halo%20Kicau%20Mania,%20saya%20ingin%20tanya%20stok%20burung%20yang%20ready" class="wa-large-btn">
-                    <i class="fa-brands fa-whatsapp"></i> Hubungi via WhatsApp
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        © 2026 Kicau Mania - Premium Bird Shop. All Rights Reserved.
-    </footer>
-
+  updateNotifyUI();
+  render();
+  checkReminders();
+  setInterval(checkReminders, 30000);
+})();
+</script>
 </body>
 </html>
